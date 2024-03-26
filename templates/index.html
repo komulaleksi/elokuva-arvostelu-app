@@ -2,3 +2,11 @@
 <title>LeffaDB</title>
 <h1>LeffaDB</h1>
 <h2>Tervetuloa elokuvatietokantasovellus LeffaDB:een!</h2>
+<br>
+{% if session.user_id %}
+<p>Tervetuloa, {{ session.username }}</p>
+<a href="/logout">Kirjaudu ulos</a>
+{% else %}
+<p><a href="/login">Kirjaudu sisään</a>
+<a href="/register">Rekisteröidy</a></p>
+{% endif %}
