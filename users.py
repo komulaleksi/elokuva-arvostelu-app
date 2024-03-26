@@ -26,5 +26,8 @@ def register(username, password):
     db.session.commit()
 
 def logout():
-    del session["user_id"]
-    del session["username"]
+    try:
+        del session["user_id"]
+        del session["username"]
+    except:
+        print("Not logged in")
