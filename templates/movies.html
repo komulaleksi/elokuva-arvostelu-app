@@ -1,0 +1,5 @@
+<!DOCTYPE html>
+<a href="/movies/add"><button>Lisää elokuva</button></a><br>
+{% for movie in movies %}
+{{movie[0]}} ({{movie[1]}})<br>
+{% endfor %}
