@@ -11,6 +11,14 @@ def get_movies():
     movie_list = movies.get_movies()
     return render_template("movies.html", movies=movie_list)
 
+@app.route("/movies/<movie_id>")
+def movie_page(movie_id):
+    try:
+        movie = movies.get_movie(movie_id)
+        return render_template("movie.html", movie=movie)
+    except:
+        return redirect("/movies")
+
 @app.route("/movies/add", methods=["GET", "POST"])
 def add_movie():
     if request.method == "GET":
