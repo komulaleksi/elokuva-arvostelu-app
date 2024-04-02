@@ -9,3 +9,11 @@ CREATE TABLE movies (
     name TEXT,
     year TEXT
 );
+
+CREATE TABLE reviews (
+    id SERIAL PRIMARY KEY,
+    movie_id INTEGER REFERENCES movies(id),
+    user_id INTEGER REFERENCES users(id),
+    score INTEGER,
+    comment TEXT
+);
