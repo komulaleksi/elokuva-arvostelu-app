@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<title>{{movie[0]}}</title>
+<h1>{{movie[0]}} ({{movie[1]}})</h1>
+<form action="/review" id="review" method="POST"></form>
+Pisteet: 1
+<input type="radio" name="score" value="1">
+<input type="radio" name="score" value="2">
+<input type="radio" name="score" value="3">
+<input type="radio" name="score" value="4">
+<input type="radio" name="score" value="5">
+5
+<br>
+<textarea name="comment" form="review" placeholder="Kirjoita arvostelusi"></textarea>
+<br>
+<input type="submit" value="Julkaise arvostelu">
+</form>
