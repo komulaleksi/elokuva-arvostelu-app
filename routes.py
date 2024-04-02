@@ -46,7 +46,6 @@ def register():
     elif request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        password2 = request.form["password2"]
         users.register(username, password)
         return redirect("/")
 
