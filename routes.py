@@ -15,7 +15,8 @@ def get_movies():
 def movie_page(movie_id):
     try:
         movie = movies.get_movie(movie_id)
-        return render_template("movie.html", movie=movie)
+        review_list = reviews.get_reviews(movie_id)
+        return render_template("movie.html", movie=movie, reviews=review_list)
     except:
         return redirect("/movies")
     
