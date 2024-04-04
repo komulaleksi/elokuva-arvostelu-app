@@ -1,6 +1,6 @@
 from app import app
-import users, movies
-from flask import render_template, request, redirect
+import users, movies, reviews
+from flask import render_template, request, redirect, session
 
 @app.route("/")
 def index():
@@ -18,6 +18,24 @@ def movie_page(movie_id):
         return render_template("movie.html", movie=movie)
     except:
         return redirect("/movies")
+    
+@app.route("/movies/<movie_id>/review", methods=["GET", "POST"])
+def movie_review(movie_id):
+    if request.method == "GET":
+        try:
+            movie = movies.get_movie(movie_id)
+            return render_template("review.html", movie=movie, movie_id = movie_id)
+        except:
+            return redirect("/movies")
+
+@app.route("/movies/add-review", methods=["POST"])
+def add_review():
+        movie_id = request.form["movie_id"]
+        user_id = session["user_id"]
+        score = request.form["score"]
+        comment = request.form["comment"]
+        reviews.add_review(movie_id, user_id, score, comment)
+        return redirect("/movies/<movie_id>")
 
 @app.route("/movies/add", methods=["GET", "POST"])
 def add_movie():
