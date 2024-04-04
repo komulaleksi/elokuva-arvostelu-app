@@ -19,14 +19,13 @@ def movie_page(movie_id):
     except:
         return redirect("/movies")
     
-@app.route("/movies/<movie_id>/review", methods=["GET", "POST"])
+@app.route("/movies/<movie_id>/review")
 def movie_review(movie_id):
-    if request.method == "GET":
-        try:
-            movie = movies.get_movie(movie_id)
-            return render_template("review.html", movie=movie, movie_id = movie_id)
-        except:
-            return redirect("/movies")
+    try:
+        movie = movies.get_movie(movie_id)
+        return render_template("review.html", movie=movie, movie_id = movie_id)
+    except:
+        return redirect("/movies")
 
 @app.route("/movies/add-review", methods=["POST"])
 def add_review():
