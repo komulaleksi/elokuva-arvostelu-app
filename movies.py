@@ -4,7 +4,7 @@ from sqlalchemy import text
 
 # Return list of movies
 def get_movies():
-    sql = text("SELECT name, year FROM movies")
+    sql = text("SELECT id, name, year FROM movies")
     movies = db.session.execute(sql).fetchall()
     return movies
 
