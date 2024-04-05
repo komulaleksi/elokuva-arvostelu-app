@@ -1,5 +1,9 @@
 <!DOCTYPE html>
+{% if session.user_id == 1 %}
 <a href="/movies/add"><button>Lisää elokuva</button></a><br>
+<hr>
+{% endif %}
 {% for movie in movies %}
 <a href="/movies/{{movie[0]}}">{{movie[1]}} ({{movie[2]}})</a><br>
+<hr>
 {% endfor %}

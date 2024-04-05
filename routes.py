@@ -22,8 +22,8 @@ def movie_page(movie_id):
     
 @app.route("/movies/<movie_id>/review")
 def movie_review(movie_id):
-    if session.get("user_id") is not None:
-        try:
+    if session.get("user_id") is not None:  # Check if user is logged in
+        try:    # Check that movie exists
             movie = movies.get_movie(movie_id)
             return render_template("review.html", movie=movie, movie_id = movie_id)
         except:
@@ -42,12 +42,15 @@ def add_review():
 
 @app.route("/movies/add", methods=["GET", "POST"])
 def add_movie():
-    if request.method == "GET":
-        return render_template("add-movie.html")
-    elif request.method == "POST":
-        movie_name = request.form["movie_name"]
-        release_year = request.form["release_year"]
-        movies.add_movie(movie_name, release_year)
+    if users.is_admin(session["user_id"]):
+        if request.method == "GET":
+            return render_template("add-movie.html")
+        elif request.method == "POST":
+            movie_name = request.form["movie_name"]
+            release_year = request.form["release_year"]
+            movies.add_movie(movie_name, release_year)
+            return redirect("/movies")
+    else:
         return redirect("/movies")
 
 @app.route("/login", methods=["GET", "POST"])
