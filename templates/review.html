@@ -3,11 +3,11 @@
 <h1>{{movie[0]}} ({{movie[1]}})</h1>
 <form action="/movies/add-review" id="review" method="POST">
     Pisteet: 1
-    <input type="radio" name="score" value="1">
-    <input type="radio" name="score" value="2">
-    <input type="radio" name="score" value="3">
-    <input type="radio" name="score" value="4">
-    <input type="radio" name="score" value="5">
+    <input type="radio" name="score" value="1" required>
+    <input type="radio" name="score" value="2" required>
+    <input type="radio" name="score" value="3" required>
+    <input type="radio" name="score" value="4" required>
+    <input type="radio" name="score" value="5" required>
     5
     <br>
     <textarea name="comment" form="review" placeholder="Kirjoita arvostelusi"></textarea>
