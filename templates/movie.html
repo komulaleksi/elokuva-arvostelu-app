@@ -2,9 +2,10 @@
 <title>{{movie[0]}}</title>
 <h1>{{movie[0]}} ({{movie[1]}})</h1>
 <br>
+{% if session.user_id %}
 <a href="/movies/{{movie_id}}/review">Arvostele</a>
 <hr>
-
+{% endif %}
 {% for review in reviews %}
 {{review[1]}}/5
 <br>

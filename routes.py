@@ -22,10 +22,13 @@ def movie_page(movie_id):
     
 @app.route("/movies/<movie_id>/review")
 def movie_review(movie_id):
-    try:
-        movie = movies.get_movie(movie_id)
-        return render_template("review.html", movie=movie, movie_id = movie_id)
-    except:
+    if session.get("user_id") is not None:
+        try:
+            movie = movies.get_movie(movie_id)
+            return render_template("review.html", movie=movie, movie_id = movie_id)
+        except:
+            return redirect("/movies")
+    else:
         return redirect("/movies")
 
 @app.route("/movies/add-review", methods=["POST"])
