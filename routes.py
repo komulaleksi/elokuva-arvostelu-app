@@ -35,14 +35,15 @@ def movie_review(movie_id):
 def add_review():
         movie_id = request.form["movie_id"]
         user_id = session["user_id"]
+        username = session["username"]
         score = request.form["score"]
         comment = request.form["comment"]
-        reviews.add_review(movie_id, user_id, score, comment)
+        reviews.add_review(movie_id, user_id, username, score, comment)
         return redirect("/movies/<movie_id>")
 
 @app.route("/movies/add", methods=["GET", "POST"])
 def add_movie():
-    if users.is_admin(session["user_id"]):
+    if users.is_admin(session["user_id"]):  # Check that user is admin
         if request.method == "GET":
             return render_template("add-movie.html")
         elif request.method == "POST":
