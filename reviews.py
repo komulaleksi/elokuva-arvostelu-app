@@ -18,6 +18,11 @@ def update_review(movie_id, user_id, score, comment):
     db.session.execute(sql, {"movie_id":movie_id, "user_id":user_id, "score":score, "comment":comment})
     db.session.commit()
 
+def get_average_score(movie_id):
+    sql = text("SELECT AVG(score) FROM reviews WHERE movie_id=:movie_id")
+    average_score = db.session.execute(sql, {"movie_id":movie_id}).fetchone()[0]
+    return round(average_score, 2)
+
 def has_review(user_id, movie_id):
     sql = text("SELECT id FROM reviews WHERE user_id=:user_id AND movie_id=:movie_id")
     review = db.session.execute(sql, {"user_id":user_id, "movie_id":movie_id}).fetchone()

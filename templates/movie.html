@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <title>{{movie[0]}}</title>
 <h1>{{movie[0]}} ({{movie[1]}})</h1>
+<h2>{{average_score}}/5</h2>
 <br>
 {% if session.user_id %}
 <a href="/movies/{{movie_id}}/review">Arvostele</a>

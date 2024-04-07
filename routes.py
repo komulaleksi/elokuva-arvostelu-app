@@ -16,7 +16,8 @@ def movie_page(movie_id):
     try:
         movie = movies.get_movie(movie_id)
         review_list = reviews.get_reviews(movie_id)
-        return render_template("movie.html", movie_id=movie_id, movie=movie, reviews=review_list)
+        average_score = reviews.get_average_score(movie_id)
+        return render_template("movie.html", movie_id=movie_id, movie=movie, reviews=review_list, average_score=average_score)
     except:
         return redirect("/movies")
     
