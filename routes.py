@@ -39,9 +39,9 @@ def add_review():
         score = request.form["score"]
         comment = request.form["comment"]
         has_review = reviews.has_review(session["user_id"], movie_id)
-        if has_review:
-            reviews.update_review(movie_id, user_id, username, score, comment)
-        else:
+        if has_review:  # Update review if review exists
+            reviews.update_review(movie_id, user_id, score, comment)
+        else:   # Create review if review doesn't exist
             reviews.add_review(movie_id, user_id, username, score, comment)
         return redirect("/movies/<movie_id>")
 

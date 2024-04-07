@@ -13,7 +13,7 @@ def add_review(movie_id, user_id, username, score, comment):
     db.session.execute(sql, {"movie_id":movie_id, "user_id":user_id, "username":username, "score":score, "comment":comment})
     db.session.commit()
 
-def update_review(movie_id, user_id, username, score, comment):
+def update_review(movie_id, user_id, score, comment):
     sql = text("UPDATE reviews SET score=:score, comment=:comment WHERE movie_id=:movie_id AND user_id=:user_id")
     db.session.execute(sql, {"movie_id":movie_id, "user_id":user_id, "score":score, "comment":comment})
     db.session.commit()
