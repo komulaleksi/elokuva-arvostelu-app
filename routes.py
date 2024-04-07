@@ -25,7 +25,7 @@ def movie_review(movie_id):
     if session.get("user_id") is not None:  # Check if user is logged in
         try:    # Check that movie exists
             movie = movies.get_movie(movie_id)
-            return render_template("review.html", movie=movie, movie_id = movie_id)
+            return render_template("review.html", movie=movie, movie_id=movie_id)
         except:
             return redirect("/movies")
     else:
@@ -38,7 +38,11 @@ def add_review():
         username = session["username"]
         score = request.form["score"]
         comment = request.form["comment"]
-        reviews.add_review(movie_id, user_id, username, score, comment)
+        has_review = reviews.has_review(session["user_id"], movie_id)
+        if has_review:  #TODO Update review instead of making a new one
+            print("Already reviewed")
+        else:
+            reviews.add_review(movie_id, user_id, username, score, comment)
         return redirect("/movies/<movie_id>")
 
 @app.route("/movies/add", methods=["GET", "POST"])
