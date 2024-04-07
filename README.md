@@ -2,20 +2,20 @@
 
 Rotten Tomatoes-tyylinen elokuvien arvostelusovellus, jossa käyttäjät voivat arvostella elokuvia antamalla niille arvosanan ja kirjoittamalla pienen arvostelun.
 
-KÄYNNISTYSOHJEET:
-Kloonaa repositio omalle koneellesi ja luo juurikansioon tiedosto .env, jossa on seuraavat tiedot:
-DATABASE_URL=<tietokannan-osoite>
-SECRET_KEY=<salainen-avain>
+KÄYNNISTYSOHJEET: \
+Kloonaa repositio omalle koneellesi ja luo juurikansioon tiedosto .env, jossa on seuraavat tiedot: \
+DATABASE_URL=tietokannan-osoite \
+SECRET_KEY=salainen-avain
 
-Aktivoi virtuaaliympäristö ja asenna riippuvuudet seuraavilla tai vastaavilla komennoilla:
-$ python3 -m venv venv
-$ source venv/bin/activate
+Aktivoi virtuaaliympäristö ja asenna riippuvuudet seuraavilla tai vastaavilla komennoilla: \
+$ python3 -m venv venv \
+$ source venv/bin/activate \
 $ pip install -r ./requirements.txt
 
-Määritä vielä tietokannan skeema:
+Määritä vielä tietokannan skeema: \
 psql < schema.sql
 
-Sovelluksen voi käynnistää komennolla:
+Sovelluksen voi käynnistää komennolla: \
 flask run
 
 Ohjelman käyttö:
