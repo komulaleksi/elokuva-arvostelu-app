@@ -75,7 +75,11 @@ def register():
     elif request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        users.register(username, password)
+        password2 = request.form["password2"]
+        if password == password2:   # Check that passwords match
+            users.register(username, password)
+        else:
+            print("Passwords don't match")
         return redirect("/")
 
 @app.route("/logout")
