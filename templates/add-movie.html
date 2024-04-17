@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<form action="/movies/add" method="POST">
+<form action="/movies/add" method="POST" enctype="multipart/form-data">
     <p>Elokuvan nimi:<br>
     <input type="text" name="movie_name" required></p>
     <p>Julkaisuvuosi:<br>
     <input type="number" name="release_year" required></p>
+    <p>Kuva<br>
+    <input type="file" name="movie_image"></p>
     <br>
     <input type="submit" value="Lisää elokuva">
 </form>

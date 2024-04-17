@@ -18,3 +18,9 @@ CREATE TABLE reviews (
     score INTEGER,
     comment TEXT
 );
+
+CREATE TABLE images (
+    id SERIAL PRIMARY KEY,
+    movie_id INTEGER REFERENCES movies(id),
+    data BYTEA
+);

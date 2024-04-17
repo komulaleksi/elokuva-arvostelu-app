@@ -16,6 +16,12 @@ def get_movie(movie_id):
 
 # Add movie to database
 def add_movie(movie_name, release_year):
-    sql = text("INSERT INTO movies (name, year) VALUES (:movie_name, :release_year)")
-    db.session.execute(sql, {"movie_name":movie_name, "release_year":release_year})
+    sql = text("INSERT INTO movies (name, year) VALUES (:movie_name, :release_year) RETURNING id")
+    movie_id = db.session.execute(sql, {"movie_name":movie_name, "release_year":release_year}).fetchone()[0]
+    db.session.commit()
+    return movie_id
+
+def add_movie_image(movie_id, data):
+    sql = text("INSERT INTO images (movie_id, data) VALUES (:movie_id, :data)")
+    db.session.execute(sql, {"movie_id":movie_id, "data":data})
     db.session.commit()
