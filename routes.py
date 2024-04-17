@@ -1,5 +1,5 @@
 from app import app
-import users, movies, reviews
+import users, movies, reviews, base64
 from flask import render_template, request, redirect, session
 
 @app.route("/")
@@ -17,9 +17,11 @@ def movie_page(movie_id):
         movie = movies.get_movie(movie_id)
         review_list = reviews.get_reviews(movie_id)
         average_score = reviews.get_average_score(movie_id)
+        data = bytes(movies.get_movie_image(movie_id))
+        movie_image = base64.b64encode(data).decode('utf-8')    # Decode image
         if not average_score:
             average_score = "?"
-        return render_template("movie.html", movie_id=movie_id, movie=movie, reviews=review_list, average_score=average_score)
+        return render_template("movie.html", movie_id=movie_id, movie=movie, reviews=review_list, average_score=average_score, movie_image=movie_image)
     except:
         return redirect("/movies")
     

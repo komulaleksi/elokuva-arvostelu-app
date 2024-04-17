@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <title>{{movie[0]}}</title>
 <h1>{{movie[0]}} ({{movie[1]}})</h1>
+<img src="data:image/jpeg;base64,{{movie_image}}" alt="Movie cover image" style="height:200px;">
 <h2>{{average_score}}/5</h2>
 <br>
 {% if session.user_id %}
