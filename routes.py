@@ -58,19 +58,20 @@ def add_movie():
         elif request.method == "POST":
             movie_name = request.form["movie_name"]
             release_year = request.form["release_year"]
-            movie_id = movies.add_movie(movie_name, release_year)
 
             movie_image = request.files["movie_image"]
             if not movie_image:
                 return redirect("/movies")
             image_name = movie_image.filename
-            if not image_name.endswith(".jpg"): # Check that file is jpg
+            filetypes = (".jpg", ".jpeg")
+            if not image_name.endswith(filetypes): # Check that file is jpeg
                 print("Wrong filetype")
                 return redirect("/movies")
             data = movie_image.read()
             if len(data) > 100*1024:    # Check that file is not larger than 100KB
                 print("Too big picture")
                 return redirect("/movies")
+            movie_id = movies.add_movie(movie_name, release_year)
             movies.add_movie_image(movie_id, data)
             return redirect("/movies")
     else:
