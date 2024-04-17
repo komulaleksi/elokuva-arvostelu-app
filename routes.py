@@ -59,6 +59,8 @@ def add_movie():
             movie_id = movies.add_movie(movie_name, release_year)
 
             movie_image = request.files["movie_image"]
+            if not movie_image:
+                return redirect("/movies")
             image_name = movie_image.filename
             if not image_name.endswith(".jpg"): # Check that file is jpg
                 print("Wrong filetype")
