@@ -25,3 +25,8 @@ def add_movie_image(movie_id, data):
     sql = text("INSERT INTO images (movie_id, data) VALUES (:movie_id, :data)")
     db.session.execute(sql, {"movie_id":movie_id, "data":data})
     db.session.commit()
+
+def get_movie_image(movie_id):
+    sql = text("SELECT data FROM images WHERE movie_id=:movie_id")
+    movie_image = db.session.execute(sql, {"movie_id":movie_id}).fetchone()[0]
+    return movie_image
