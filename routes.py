@@ -112,6 +112,16 @@ def logout():
         return error("Et ole kirjautunut sisään")
     return redirect("/")
 
+@app.route("/movies/search")
+def search():
+    return render_template("search.html")
+
+@app.route("/movies/search/result")
+def search_result():
+    query = request.args["query"]
+    results = movies.get_movies_like(query)
+    return render_template("movies.html", movies=results)
+
 @app.route("/error")
 def error(error_message):
     return render_template("error.html", error_message=error_message)

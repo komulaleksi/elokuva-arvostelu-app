@@ -30,3 +30,9 @@ def get_movie_image(movie_id):
     sql = text("SELECT data FROM images WHERE movie_id=:movie_id")
     movie_image = db.session.execute(sql, {"movie_id":movie_id}).fetchone()[0]
     return movie_image
+
+# Get movies that include keyword/query
+def get_movies_like(query):
+    sql = text("SELECT id, name, year FROM movies WHERE name LIKE :query")
+    movies_like = db.session.execute(sql, {"query":"%"+query+"%"}).fetchall()
+    return movies_like
