@@ -54,7 +54,11 @@ def add_review():
 @app.route("/delete-review")
 def delete_review():
     id = request.args.get("id")
-    reviews.delete_review(id)
+    if users.is_admin(session["user_id"]) or reviews.get_review_by_id(id)[1] == session["user_id"]:
+        reviews.delete_review(id)
+    else:
+        print("Insufficient privileges")
+        return error("Sinulla ei ole oikeuksia poistaa tätä arvostelua.")
     return redirect("/movies")
 
 @app.route("/movies/add", methods=["GET", "POST"])
