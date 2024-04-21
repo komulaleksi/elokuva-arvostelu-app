@@ -22,7 +22,8 @@ def movie_page(movie_id):
         if not average_score:
             average_score = "?"
         return render_template("movie.html", movie_id=movie_id, movie=movie, reviews=review_list, average_score=average_score, movie_image=movie_image)
-    except:
+    except Exception as error:
+        print(error)
         return redirect("/movies")
     
 @app.route("/movies/<movie_id>/review")
@@ -49,6 +50,12 @@ def add_review():
         else:   # Create review if review doesn't exist
             reviews.add_review(movie_id, user_id, username, score, comment)
         return redirect("/movies/<movie_id>")
+
+@app.route("/delete-review")
+def delete_review():
+    id = request.args.get("id")
+    reviews.delete_review(id)
+    return redirect("/movies")
 
 @app.route("/movies/add", methods=["GET", "POST"])
 def add_movie():

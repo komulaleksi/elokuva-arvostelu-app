@@ -9,9 +9,13 @@
 <hr>
 {% endif %}
 {% for review in reviews %}
-{{review[1]}}:
-{{review[2]}}/5
+{{review[2]}}:
+{{review[3]}}/5
 <br>
-{{review[3]}}
+{{review[4]}}
+{% if session.user_id == review[1] or session.user_id == 1 %}
+<br>
+<a href="/delete-review?id={{review[0]}}">Poista arvostelu</a>
+{% endif %}
 <hr>
 {% endfor %}

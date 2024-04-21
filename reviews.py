@@ -3,7 +3,7 @@ from flask import session
 from sqlalchemy import text
 
 def get_reviews(movie_id):
-    sql = text("SELECT user_id, username, score, comment FROM reviews WHERE movie_id=:movie_id")
+    sql = text("SELECT id, user_id, username, score, comment FROM reviews WHERE movie_id=:movie_id")
     reviews = db.session.execute(sql, {"movie_id":movie_id}).fetchall()
     return reviews
 
@@ -31,3 +31,8 @@ def has_review(user_id, movie_id):
     review = db.session.execute(sql, {"user_id":user_id, "movie_id":movie_id}).fetchone()
 
     return review
+
+def delete_review(id):
+    sql = text("DELETE FROM reviews WHERE id=:id")
+    db.session.execute(sql, {"id":id})
+    db.session.commit()
