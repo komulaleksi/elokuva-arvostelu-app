@@ -16,8 +16,11 @@ def login(username, password):
             session["user_id"] = user[0]
             session["username"] = username
             print(f"Logged in as {username}")
+            return True
         else:
             print("Incorrect password")
+            return False
+            
 
 def register(username, password):
     hash_value = generate_password_hash(password)
@@ -29,8 +32,11 @@ def logout():
     try:
         del session["user_id"]
         del session["username"]
+        return True
     except:
         print("Not logged in")
+        return False
+
 
 def get_username(user_id):
     sql = text("SELECT username FROM users WHERE id=:user_id")

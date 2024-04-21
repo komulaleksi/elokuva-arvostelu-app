@@ -66,11 +66,11 @@ def add_movie():
             filetypes = (".jpg", ".jpeg")
             if not image_name.endswith(filetypes): # Check that file is jpeg
                 print("Wrong filetype")
-                return redirect("/movies")
+                return error("Väärä tiedostotyyppi. Vain jpeg tiedostot hyväksytään")
             data = movie_image.read()
             if len(data) > 100*1024:    # Check that file is not larger than 100KB
                 print("Too big picture")
-                return redirect("/movies")
+                return error("Liian suuri kuva. Max. koko 100kb")
             movie_id = movies.add_movie(movie_name, release_year)
             movies.add_movie_image(movie_id, data)
             return redirect("/movies")
@@ -84,7 +84,8 @@ def login():
     elif request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        users.login(username, password)
+        if not users.login(username, password): # If password is incorrect
+            return error("Väärä käyttäjätunnus tai salasana")
         return redirect("/")
 
 @app.route("/register", methods=["GET", "POST"])
@@ -96,12 +97,21 @@ def register():
         password = request.form["password"]
         password2 = request.form["password2"]
         if password == password2:   # Check that passwords match
-            users.register(username, password)
+            try:
+                users.register(username, password)
+            except:
+                return error("Käyttätunnus on jo käytössä")
         else:
             print("Passwords don't match")
+            return error("Salasanat eivät täsmää")
         return redirect("/")
 
 @app.route("/logout")
 def logout():
-    users.logout()
+    if not users.logout():  # If user is not logged in
+        return error("Et ole kirjautunut sisään")
     return redirect("/")
+
+@app.route("/error")
+def error(error_message):
+    return render_template("error.html", error_message=error_message)
