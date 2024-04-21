@@ -7,6 +7,11 @@ def get_reviews(movie_id):
     reviews = db.session.execute(sql, {"movie_id":movie_id}).fetchall()
     return reviews
 
+def get_review_by_id(id):
+    sql = text("SELECT id, user_id, username, score, comment FROM reviews WHERE id=:id")
+    review = db.session.execute(sql, {"id":id}).fetchall()[0]
+    return review
+
 def add_review(movie_id, user_id, username, score, comment):
     sql = text("""INSERT INTO reviews (movie_id, user_id, username, score, comment) 
                                 VALUES (:movie_id, :user_id, :username, :score, :comment)""")
