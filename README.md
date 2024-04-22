@@ -33,11 +33,11 @@ Tämän hetkinen toiminnalisuus:
 - Käyttäjä voi poistaa omia arvostelujaan.
 - Ylläpitäjä voi poistaa minkä tahansa arvostelun.
 - Ylläpitäjä voi lisätä elokuvia tietokantaan.
+- Ylläpitäjä voi poistaa elokuvia tietokannasta.
 * Ylläpitäjä on ensimmäisenä luotu käyttäjä (user_id = 1)
 
 Lopullisen sovelluksen ominaisuuksia, joita ei vielä ole toteutettu:
 - Elokuvilla on nimen, kuvan ja julkaisuvuoden lisäksi genre.
 - Elokuvia voi hakea myös genren tai julkaisuvuoden mukaan.
 - Käyttäjillä omat profiilit, jonne voi lisätä tietoa, kuten lempielokuvan yms.
-- Ylläpitäjä voi poistaa elokuvia tietokannasta
 - CSS ulkoasun parantamiseksi
