@@ -36,3 +36,8 @@ def get_movies_like(query):
     sql = text("SELECT id, name, year FROM movies WHERE name LIKE :query")
     movies_like = db.session.execute(sql, {"query":"%"+query+"%"}).fetchall()
     return movies_like
+
+def delete_movie(id):
+    sql = text("DELETE FROM movies WHERE id=:id")
+    db.session.execute(sql, {"id":id})
+    db.session.commit()

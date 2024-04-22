@@ -20,4 +20,8 @@
 <hr>
 {% endfor %}
 <br>
+{% if session.user_id == 1 %}
+<a href="/delete-movie?id={{movie_id}}">Poista elokuva</a>
+<br>
+{% endif %}
 <a href="/movies">Takaisin</a>

@@ -87,6 +87,16 @@ def add_movie():
             return redirect("/movies")
     else:
         return redirect("/movies")
+    
+@app.route("/delete-movie")
+def delete_movie():
+    id = request.args.get("id")
+    if users.is_admin(session["user_id"]):
+        movies.delete_movie(id)
+    else:
+        print("Insufficient privileges")
+        return error("Sinulla ei ole oikeuksia poistaa tätä elokuvaa.")
+    return redirect("/movies")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
