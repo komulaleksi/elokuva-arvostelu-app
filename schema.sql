@@ -12,7 +12,7 @@ CREATE TABLE movies (
 
 CREATE TABLE reviews (
     id SERIAL PRIMARY KEY,
-    movie_id INTEGER REFERENCES movies(id),
+    movie_id INTEGER REFERENCES movies(id) ON DELETE CASCADE,
     user_id INTEGER REFERENCES users(id),
     username TEXT REFERENCES users(username),
     score INTEGER,
@@ -21,6 +21,6 @@ CREATE TABLE reviews (
 
 CREATE TABLE images (
     id SERIAL PRIMARY KEY,
-    movie_id INTEGER REFERENCES movies(id),
+    movie_id INTEGER REFERENCES movies(id) ON DELETE CASCADE,
     data BYTEA
 );
