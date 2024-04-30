@@ -1,11 +1,49 @@
-<!DOCTYPE html>
+<html lang="fi">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<title>LeffaDB</title>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">LeffaDB</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Koti <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/movies">Elokuvat</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/movies/search">Hae elokuvaa <span class="sr-only">(current)</span></a>
+        </li>
+        {% if session.user_id %}
+        <li class="nav-item">
+            <a class="nav-link" href="#">{{session.username}} <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/logout">Kirjaudu ulos <span class="sr-only">(current)</span></a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+        <a class="nav-link" href="/login">Kirjaudu sisään <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/register">Rekisteröidy <span class="sr-only">(current)</span></a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
 <title>{{movie[0]}}</title>
 <h1>{{movie[0]}} ({{movie[1]}})</h1>
 <img src="data:image/jpeg;base64,{{movie_image}}" alt="Movie cover image" style="height:200px;">
 <h2>{{average_score}}/5</h2>
 <br>
 {% if session.user_id %}
-<a href="/movies/{{movie_id}}/review">Arvostele</a>
+<a href="/movies/{{movie_id}}/review"><button>Arvostele</button></a>
 <hr>
 {% endif %}
 {% for review in reviews %}
@@ -19,7 +57,6 @@
 {% endif %}
 <hr>
 {% endfor %}
-<br>
 {% if session.user_id == 1 %}
 <a href="/delete-movie?id={{movie_id}}">Poista elokuva</a>
 <br>

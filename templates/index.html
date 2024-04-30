@@ -1,13 +1,42 @@
 <!DOCTYPE html>
+<html lang="fi" data-bs-theme="dark">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <title>LeffaDB</title>
-<h1>LeffaDB</h1>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">LeffaDB</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Koti <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/movies">Elokuvat</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/movies/search">Hae elokuvaa</a>
+        </li>
+        {% if session.user_id %}
+        <li class="nav-item">
+            <a class="nav-link" href="#">{{session.username}}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/logout">Kirjaudu ulos</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+        <a class="nav-link" href="/login">Kirjaudu sisään</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/register">Rekisteröidy</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
 <h2>Tervetuloa elokuvatietokantasovellus LeffaDB:een!</h2>
-<br>
-<a href="/movies">Elokuvat</a>
-{% if session.user_id %}
-<p>Tervetuloa, {{ session.username }}</p>
-<a href="/logout">Kirjaudu ulos</a>
-{% else %}
-<p><a href="/login">Kirjaudu sisään</a>
-<a href="/register">Rekisteröidy</a></p>
-{% endif %}
+</html>
