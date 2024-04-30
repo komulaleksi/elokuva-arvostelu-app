@@ -24,3 +24,8 @@ CREATE TABLE images (
     movie_id INTEGER REFERENCES movies(id) ON DELETE CASCADE,
     data BYTEA
 );
+
+CREATE TABLE user_info (
+    user_id INTEGER REFERENCES users(id),
+    fav_movie TEXT,
+);
