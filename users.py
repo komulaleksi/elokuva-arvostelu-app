@@ -24,9 +24,10 @@ def login(username, password):
 
 def register(username, password):
     hash_value = generate_password_hash(password)
-    sql = text("INSERT INTO users (username, password) VALUES (:username, :password)")
-    db.session.execute(sql, {"username":username, "password":hash_value})
+    sql = text("INSERT INTO users (username, password) VALUES (:username, :password) RETURNING id")
+    user_id = db.session.execute(sql, {"username":username, "password":hash_value}).fetchone()[0]
     db.session.commit()
+    return user_id
 
 def logout():
     try:
