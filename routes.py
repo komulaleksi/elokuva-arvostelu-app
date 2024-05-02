@@ -1,5 +1,5 @@
 from app import app
-import users, movies, reviews, base64
+import users, movies, reviews, user_info, base64
 from flask import render_template, request, redirect, session
 
 @app.route("/")
@@ -54,7 +54,7 @@ def add_review():
 @app.route("/delete-review")
 def delete_review():
     id = request.args.get("id")
-    if users.is_admin(session["user_id"]) or reviews.get_review_by_id(id)[1] == session["user_id"]:
+    if users.is_admin(session["user_id"]) or reviews.get_review_by_id(id)[1] == session["user_id"]: #TODO fix key error when session doesn't exist
         reviews.delete_review(id)
     else:
         print("Insufficient privileges")
@@ -91,7 +91,7 @@ def add_movie():
 @app.route("/delete-movie")
 def delete_movie():
     id = request.args.get("id")
-    if users.is_admin(session["user_id"]):
+    if users.is_admin(session["user_id"]):  #TODO fix key error when session doesn't exist
         movies.delete_movie(id)
     else:
         print("Insufficient privileges")
@@ -117,10 +117,15 @@ def register():
         username = request.form["username"]
         password = request.form["password"]
         password2 = request.form["password2"]
+        fav_movie = request.form["fav_movie"]
+        fav_genre = request.form["fav_genre"]
         if password == password2:   # Check that passwords match
             try:
-                users.register(username, password)
-            except:
+                user_id = users.register(username, password)
+                user_info.create_profile(user_id, username, fav_movie, fav_genre)
+                
+            except Exception as e:
+                print(e)
                 return error("Käyttätunnus on jo käytössä")
         else:
             print("Passwords don't match")
@@ -142,6 +147,14 @@ def search_result():
     query = request.args["query"]
     results = movies.get_movies_like(query)
     return render_template("movies.html", movies=results)
+
+@app.route("/profile")
+def profiles():
+    return render_template("profile.html")
+
+@app.route("/profile/<user_id>")
+def profile(user_id):
+    return render_template("profile.html", user_id)
 
 @app.route("/error")
 def error(error_message):
