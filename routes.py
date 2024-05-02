@@ -148,13 +148,15 @@ def search_result():
     results = movies.get_movies_like(query)
     return render_template("movies.html", movies=results)
 
-@app.route("/profile")
+@app.route("/profiles")
 def profiles():
     return render_template("profile.html")
 
-@app.route("/profile/<user_id>")
+@app.route("/profiles/<user_id>")
 def profile(user_id):
-    return render_template("profile.html", user_id)
+    user = user_info.get_profiles(user_id)
+    print(user_info.get_profiles(user_id))
+    return render_template("profile.html", user=user)
 
 @app.route("/error")
 def error(error_message):
