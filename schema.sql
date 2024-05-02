@@ -27,5 +27,7 @@ CREATE TABLE images (
 
 CREATE TABLE user_info (
     user_id INTEGER REFERENCES users(id),
+    username TEXT REFERENCES users(username),
     fav_movie TEXT,
+    fav_genre TEXT
 );
