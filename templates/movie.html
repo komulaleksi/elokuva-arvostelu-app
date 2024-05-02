@@ -47,7 +47,7 @@
 <hr>
 {% endif %}
 {% for review in reviews %}
-{{review[2]}}:
+<a href="/profiles/{{review[1]}}">{{review[2]}}:</a>
 {{review[3]}}/5
 <br>
 {{review[4]}}
