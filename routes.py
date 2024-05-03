@@ -2,7 +2,7 @@ from app import app
 import users, movies, reviews, user_info, base64
 from flask import render_template, request, redirect, session
 
-genres = ["Dokumentti", "Draama","Fantasia", "Komedia", "Rakkaus", "Seikkailu", "Toiminta", "Jännitys"] # List of genres
+genres = sorted(["Dokumentti", "Draama","Fantasia", "Jännitys", "Komedia", "Rakkaus", "Seikkailu", "Toiminta"]) # List of genres
 
 @app.route("/")
 def index():
