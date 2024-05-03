@@ -15,9 +15,9 @@ def get_movie(movie_id):
     return movie
 
 # Add movie to database
-def add_movie(movie_name, release_year):
-    sql = text("INSERT INTO movies (name, year) VALUES (:movie_name, :release_year) RETURNING id")
-    movie_id = db.session.execute(sql, {"movie_name":movie_name, "release_year":release_year}).fetchone()[0]
+def add_movie(movie_name, genre, release_year):
+    sql = text("INSERT INTO movies (name, genre, year) VALUES (:movie_name, :genre, :release_year) RETURNING id")
+    movie_id = db.session.execute(sql, {"movie_name":movie_name, "genre":genre, "release_year":release_year}).fetchone()[0]
     db.session.commit()
     return movie_id
 

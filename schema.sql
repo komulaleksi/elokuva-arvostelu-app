@@ -7,6 +7,7 @@ CREATE TABLE users (
 CREATE TABLE movies (
     id SERIAL PRIMARY KEY,
     name TEXT,
+    genre TEXT,
     year TEXT
 );
 

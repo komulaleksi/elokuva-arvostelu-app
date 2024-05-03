@@ -43,6 +43,12 @@
     <input type="text" name="movie_name" required></p>
     <p>Julkaisuvuosi:<br>
     <input type="number" name="release_year" required></p>
+    <p>Genre:<br>
+    <select name="genre" required>
+      {% for genre in genres %}
+      <option value="{{genre}}">{{genre}}</option>
+      {% endfor %}
+    </select></p>
     <p>Kuva<br>
     <input type="file" name="movie_image" required></p>
     <br>

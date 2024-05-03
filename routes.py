@@ -65,10 +65,12 @@ def delete_review():
 def add_movie():
     if users.is_admin(session["user_id"]):  # Check that user is admin
         if request.method == "GET":
-            return render_template("add-movie.html")
+            genres = ["Dokumentti", "Draama","Fantasia", "Komedia", "Rakkaus", "Seikkailu", "Toiminta", "Jännitys"]
+            return render_template("add-movie.html", genres=genres)
         elif request.method == "POST":
             movie_name = request.form["movie_name"]
             release_year = request.form["release_year"]
+            genre = request.form["genre"]
 
             movie_image = request.files["movie_image"]
             if not movie_image:
@@ -82,7 +84,7 @@ def add_movie():
             if len(data) > 100*1024:    # Check that file is not larger than 100KB
                 print("Too big picture")
                 return error("Liian suuri kuva. Max. koko 100kb")
-            movie_id = movies.add_movie(movie_name, release_year)
+            movie_id = movies.add_movie(movie_name, genre, release_year)
             movies.add_movie_image(movie_id, data)
             return redirect("/movies")
     else:
