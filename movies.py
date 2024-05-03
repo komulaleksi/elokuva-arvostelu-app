@@ -10,7 +10,7 @@ def get_movies():
 
 # Return movie name and release year by id
 def get_movie(movie_id):
-    sql = text("SELECT name, year FROM movies WHERE id=:movie_id")
+    sql = text("SELECT name, genre, year FROM movies WHERE id=:movie_id")
     movie = db.session.execute(sql, {"movie_id":movie_id}).fetchall()[0]
     return movie
 
