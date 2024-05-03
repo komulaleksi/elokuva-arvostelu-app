@@ -126,6 +126,7 @@ def register():
             try:
                 user_id = users.register(username, password)
                 user_info.create_profile(user_id, username, fav_movie, fav_genre)
+                users.login(username, password)
                 
             except Exception as e:
                 print(e)
