@@ -2,6 +2,8 @@ from app import app
 import users, movies, reviews, user_info, base64
 from flask import render_template, request, redirect, session
 
+genres = ["Dokumentti", "Draama","Fantasia", "Komedia", "Rakkaus", "Seikkailu", "Toiminta", "Jännitys"] # List of genres
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -65,7 +67,6 @@ def delete_review():
 def add_movie():
     if users.is_admin(session["user_id"]):  # Check that user is admin
         if request.method == "GET":
-            genres = ["Dokumentti", "Draama","Fantasia", "Komedia", "Rakkaus", "Seikkailu", "Toiminta", "Jännitys"]
             return render_template("add-movie.html", genres=genres)
         elif request.method == "POST":
             movie_name = request.form["movie_name"]
