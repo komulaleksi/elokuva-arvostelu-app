@@ -33,8 +33,8 @@ def get_movie_image(movie_id):
 
 # Get movies that include keyword/query
 def get_movies_like(query):
-    sql = text("SELECT id, name, year FROM movies WHERE name LIKE :query")
-    movies_like = db.session.execute(sql, {"query":"%"+query+"%"}).fetchall()
+    sql = text("SELECT id, name, year FROM movies WHERE name LIKE :query OR genre LIKE :query OR year=:year")
+    movies_like = db.session.execute(sql, {"query":"%"+query+"%", "year":query}).fetchall()
     return movies_like
 
 def get_movies_by_year(release_year):
