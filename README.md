@@ -25,19 +25,14 @@ Ensimmäisenä luotu käyttäjätunnus (user_id = 1) on ylläpitäjä, joka voi 
 
 -------------------------------------------------------------------------------------------------
 
-Tämän hetkinen toiminnalisuus:
+Sovelluksen päätoiminnalisuus:
 - Käyttäjä voi luoda käyttäjätunnuksen sekä kirjautua sisään ja ulos.
 - Käyttäjä voi antaa elokuvalle pisteitä väliltä 1-5 sekä kirjoittaa elokuvalle arvostelun.
 - Käyttäjä näkee jokaisesta elokuvasta käyttäjien antamien pisteiden keskiarvon.
-- Käyttäjä voi hakea elokuvaa nimellä
+- Käyttäjä voi hakea elokuvaa nimen, julkaisuvuoden tai genren mukaan
 - Käyttäjä voi poistaa omia arvostelujaan.
 - Ylläpitäjä voi poistaa minkä tahansa arvostelun.
 - Ylläpitäjä voi lisätä elokuvia tietokantaan.
 - Ylläpitäjä voi poistaa elokuvia tietokannasta.
+- Käyttäjillä on profiili, jossa näkyy heidän lempielokuva ja -genre sekä heidän jättämät arvostelut
 * Ylläpitäjä on ensimmäisenä luotu käyttäjä (user_id = 1)
-
-Lopullisen sovelluksen ominaisuuksia, joita ei vielä ole toteutettu:
-- Elokuvilla on nimen, kuvan ja julkaisuvuoden lisäksi genre.
-- Elokuvia voi hakea myös genren tai julkaisuvuoden mukaan.
-- Käyttäjillä omat profiilit, jonne voi lisätä tietoa, kuten lempielokuvan yms.
-- CSS ulkoasun parantamiseksi
