@@ -37,16 +37,6 @@ def get_movies_like(query):
     movies_like = db.session.execute(sql, {"query":"%"+query+"%", "year":query}).fetchall()
     return movies_like
 
-def get_movies_by_year(release_year):
-    sql = text("SELECT id, name, year FROM movies WHERE release_year=:release_year")
-    movies = db.session.execute(sql, {"release_year":release_year}).fetchall()
-    return movies
-
-def get_movies_by_genre(genre):
-    sql = text("SELECT id, name, year FROM movies WHERE genre=:genre")
-    movies = db.session.execute(sql, {"genre":genre}).fetchall()
-    return movies
-
 def delete_movie(id):
     sql = text("DELETE FROM movies WHERE id=:id")
     db.session.execute(sql, {"id":id})
