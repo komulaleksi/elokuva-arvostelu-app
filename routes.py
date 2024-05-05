@@ -40,7 +40,7 @@ def movie_review(movie_id):
         except:
             return redirect("/movies")
     else:
-        return redirect("/movies")
+        return error("Et ole kirjautunut sisään")
 
 @app.route("/movies/add-review", methods=["POST"])
 def add_review():
