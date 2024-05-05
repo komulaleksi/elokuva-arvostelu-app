@@ -10,8 +10,14 @@ def get_movies():
 
 # Return movie name and release year by id
 def get_movie(movie_id):
-    sql = text("SELECT name, genre, year FROM movies WHERE id=:movie_id")
+    sql = text("SELECT DISTINCT name, genre, year FROM movies WHERE id=:movie_id")
     movie = db.session.execute(sql, {"movie_id":movie_id}).fetchall()[0]
+    return movie
+
+# Check whether a movie exists
+def check_if_exists(name):
+    sql = text("SELECT DISTINCT id FROM movies WHERE name=:name")
+    movie = db.session.execute(sql, {"name":name}).fetchone()
     return movie
 
 # Add movie to database

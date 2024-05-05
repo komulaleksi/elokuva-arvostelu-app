@@ -46,6 +46,8 @@ def add_review():
         username = session["username"]
         score = request.form["score"]
         comment = request.form["comment"]
+        if len(comment) > 1000:
+            return error("Liian pitkä arvostelu, max pituus 100 merkkiä!")
         has_review = reviews.has_review(session["user_id"], movie_id)
         if has_review:  # Update review if review exists
             reviews.update_review(movie_id, user_id, score, comment)
@@ -85,6 +87,8 @@ def add_movie():
             if len(data) > 100*1024:    # Check that file is not larger than 100KB
                 print("Too big picture")
                 return error("Liian suuri kuva. Max. koko 100kb")
+            if movies.check_if_exists(movie_name):  # Check that movie isn't already in the database
+                return error("Samanniminen elokuva on jo olemassa!")
             movie_id = movies.add_movie(movie_name, genre, release_year)
             movies.add_movie_image(movie_id, data)
             return redirect("/movies")
@@ -122,6 +126,8 @@ def register():
         password2 = request.form["password2"]
         fav_movie = request.form["fav_movie"]
         fav_genre = request.form["fav_genre"]
+        if len(username) > 20 or len(password) > 20 or len(fav_movie) > 50: # Failsafe if user tries to bypass max input length
+            return error("Liian pitkä syöte!")
         if password == password2:   # Check that passwords match
             try:
                 user_id = users.register(username, password)

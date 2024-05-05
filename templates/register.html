@@ -40,13 +40,13 @@
   </nav>
 <form action="/register" method="POST">
     <p>Käyttäjätunnus:<br>
-    <input type="text" name="username" required></p>
+    <input type="text" name="username" required maxlength="20"></p>
     <p>Salasana:<br>
-    <input type="password" name="password" required></p>
+    <input type="password" name="password" required maxlength="20"></p>
     <p>Salana uudelleen:<br>
-    <input type="password" name="password2" required></p>
+    <input type="password" name="password2" required maxlength="20"></p>
     <p>Lempielokuva:<br>
-    <input type="text" name="fav_movie"></p>
+    <input type="text" name="fav_movie" maxlength="50"></p>
     <p>Lempigenre:<br>
       <select name="fav_genre" required>
         {% for genre in genres %}
