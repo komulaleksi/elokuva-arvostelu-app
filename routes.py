@@ -1,8 +1,10 @@
-from app import app
-import users, movies, reviews, user_info, base64
+import base64
 from flask import render_template, request, redirect, session
+from app import app
+import users, movies, reviews, user_info
 
-genres = sorted(["Dokumentti", "Draama","Fantasia", "Jännitys", "Komedia", "Rakkaus", "Seikkailu", "Toiminta"]) # List of genres
+genres = sorted(["Dokumentti", "Draama","Fantasia", "Jännitys",
+                  "Komedia", "Rakkaus", "Seikkailu", "Toiminta"]) # List of genres
 
 @app.route("/")
 def index():
@@ -23,7 +25,8 @@ def movie_page(movie_id):
         movie_image = base64.b64encode(data).decode('utf-8')    # Decode image
         if not average_score:
             average_score = "?"
-        return render_template("movie.html", movie_id=movie_id, movie=movie, reviews=review_list, average_score=average_score, movie_image=movie_image)
+        return render_template("movie.html", movie_id=movie_id, movie=movie,
+                                reviews=review_list, average_score=average_score, movie_image=movie_image)
     except Exception as error:
         print(error)
         return redirect("/movies")
@@ -41,19 +44,19 @@ def movie_review(movie_id):
 
 @app.route("/movies/add-review", methods=["POST"])
 def add_review():
-        movie_id = request.form["movie_id"]
-        user_id = session["user_id"]
-        username = session["username"]
-        score = request.form["score"]
-        comment = request.form["comment"]
-        if len(comment) > 1000:
-            return error("Liian pitkä arvostelu, max pituus 100 merkkiä!")
-        has_review = reviews.has_review(session["user_id"], movie_id)
-        if has_review:  # Update review if review exists
-            reviews.update_review(movie_id, user_id, score, comment)
-        else:   # Create review if review doesn't exist
-            reviews.add_review(movie_id, user_id, username, score, comment)
-        return redirect("/movies/<movie_id>")
+    movie_id = request.form["movie_id"]
+    user_id = session["user_id"]
+    username = session["username"]
+    score = request.form["score"]
+    comment = request.form["comment"]
+    if len(comment) > 1000:
+        return error("Liian pitkä arvostelu, max pituus 100 merkkiä!")
+    has_review = reviews.has_review(session["user_id"], movie_id)
+    if has_review:  # Update review if review exists
+        reviews.update_review(movie_id, user_id, score, comment)
+    else:   # Create review if review doesn't exist
+        reviews.add_review(movie_id, user_id, username, score, comment)
+    return redirect("/movies/<movie_id>")
 
 @app.route("/delete-review")
 def delete_review():
