@@ -165,6 +165,8 @@ def profile(user_id):
 @app.route("/profiles/edit", methods=["GET", "POST"])
 def edit_profile():
     if request.method == "GET":
+        if session.get("user_id") is None:
+            return render_template("error.html", error_message="Et ole kirjautunut sisään")
         return render_template("edit_profile.html", genres=genres)
     if request.method == "POST":
         user_id = session["user_id"]
