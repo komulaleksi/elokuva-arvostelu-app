@@ -162,6 +162,17 @@ def profile(user_id):
     print(user_info.get_profiles(user_id))
     return render_template("profile.html", user=user)
 
+@app.route("/profiles/edit", methods=["GET", "POST"])
+def edit_profile():
+    if request.method == "GET":
+        return render_template("edit_profile.html", genres=genres)
+    if request.method == "POST":
+        user_id = session["user_id"]
+        fav_movie = request.form["fav_movie"]
+        fav_genre = request.form["fav_genre"]
+        user_info.edit_profile(user_id, fav_movie, fav_genre)
+        return redirect(f"/profiles/{user_id}")
+
 @app.route("/error")
 def error(error_message):
     return render_template("error.html", error_message=error_message)

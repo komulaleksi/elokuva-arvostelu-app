@@ -38,11 +38,16 @@
       </ul>
     </div>
 </nav>
-<h1>{{user[1]}}</h1>
-<p>Lempielokuva: {{user[2]}}</p>
-<p>Lempigenre: {{user[3]}}</p>
-<br>
-{% if session.user_id == user[0] %}
-<a href="/profiles/edit"><button>Muokkaa profiilia</button></a>
-{% endif %}
 
+<form action="/profiles/edit" method="POST">
+    <p>Lempielokuva:<br>
+    <input type="text" name="fav_movie"></p>
+    <p>Lempigenre:<br>
+      <select name="fav_genre" required>
+        {% for genre in genres %}
+        <option value="{{genre}}">{{genre}}</option>
+        {% endfor %}
+      </select></p>
+    <br>
+    <input type="submit" value="Tallenna">
+</form>
