@@ -37,6 +37,11 @@ def has_review(user_id, movie_id):
 
     return review
 
+def get_reviews_from_user(user_id):
+    sql = text("SELECT r.id, r.user_id, r.movie_id, r.score, r.comment, m.name FROM reviews r, movies m WHERE r.user_id=:user_id AND movie_id=m.id")
+    reviews = db.session.execute(sql, {"user_id":user_id}).fetchall()
+    return reviews
+
 def delete_review(id):
     sql = text("DELETE FROM reviews WHERE id=:id")
     db.session.execute(sql, {"id":id})

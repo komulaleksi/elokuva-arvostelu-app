@@ -159,8 +159,8 @@ def profiles():
 @app.route("/profiles/<user_id>")
 def profile(user_id):
     user = user_info.get_profiles(user_id)
-    print(user_info.get_profiles(user_id))
-    return render_template("profile.html", user=user)
+    review_list = reviews.get_reviews_from_user(user_id)
+    return render_template("profile.html", user=user, reviews=review_list)
 
 @app.route("/profiles/edit", methods=["GET", "POST"])
 def edit_profile():

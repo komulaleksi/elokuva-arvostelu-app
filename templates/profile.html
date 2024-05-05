@@ -43,6 +43,14 @@
 <p>Lempielokuva: {{user[2]}}</p>
 <p>Lempigenre: {{user[3]}}</p>
 <br>
+{% for review in reviews %}
+<a href="/movies/{{review[2]}}">{{review[5]}}</a>
+{{review[3]}}/5
+<br>
+{{review[4]}}
+<hr>
+{% endfor %}
+<br>
 {% if session.user_id == user[0] %}
 <a href="/profiles/edit"><button>Muokkaa profiilia</button></a>
 {% endif %}
